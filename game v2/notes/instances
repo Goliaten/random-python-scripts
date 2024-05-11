@@ -1,0 +1,85 @@
+Char(name hp_max atk atk_var recruitment_cost=0 g_drop=0 exp_drop=0,  def_drop=[], prb_drop=[],
+    mana_max=0 mana_gain=0 defence=0 defence_type='none' weapon=basic armor='basic', AI=AI_random,
+    skill=[], skill_tree=[], magic=[], magic_tree=[], passive=[], passive_tree=[]
+    tree_step=[])
+
+#--------------------imps---------------------
+imp_1 = Char('Lesser Imp',  40,  4,  2, 0, 20,  10,  imp_def_drop_low, imp_prb_drop_low,  0, 0, 0, ['Low Daemon', 'Imp'], imp_bas_wep, imp_bas_arm)
+imp_2 = Char('Imp Servant', 40,  4,  2, 0, 35,  20,  imp_def_drop_low, imp_prb_drop_low,  0, 0, 0, ['Low Daemon', 'Imp'], imp_lig_wep, imp_lig_arm, AI=AI_servant)
+imp_3 = Char('Imp',         60,  7,  1, 0, 55,  35,  imp_def_drop_med, imp_prb_drop_med,  0, 0, 0, ['Low Daemon', 'Imp'], imp_lig_wep, imp_lig_arm, AI=AI_weakfirst)
+imp_4 = Char('Imp Soldier', 60,  7,  1, 0, 70,  45,  imp_def_drop_med, imp_prb_drop_med,  0, 0, 0, ['Low Daemon', 'Imp'], imp_med_wep, imp_med_arm, AI=AI_servant)
+imp_5 = Char('Greater Imp', 120, 10, 0, 0, 80, 65,   imp_def_drop_hig, imp_prb_drop_hig,  0, 0, 0, ['Daemon', 'Imp'],     imp_lig_wep, imp_med_arm, AI=AI_onetarg)
+imp_6 = Char('Imp General', 120, 10, 0, 0, 90, 80,   imp_def_drop_hig, imp_prb_drop_hig,  0, 0, 0, ['Daemon', 'Imp'],     imp_med_wep, imp_goo_arm, AI=AI_command)
+imp_? = Char('Imp Leader',  120, 10, 0, 0, 120, 100, imp_def_drop_hig, imp_prb_drop_hig,  0, 0, 0, ['Daemon', 'Imp'],     imp_goo_wep, imp_vgo_arm, AI=AI_strongfirst)
+
+imp_? = Char('Abandoned Imp', 30,  3,  1, 0, ?, ?,         def_drop,         prb_drop,  0, 0, 0, ['Low Daemon', 'Imp'], imp_bas_wep, imp_bas_arm)
+imp_? = Char('Imp Deserter',  65,  8,  1, 0, ?, ?,         def_drop,         prb_drop,  0, 0, 0, ['Low Daemon', 'Imp'], imp_med_wep, imp_med_arm, AI=AI_weakfirst)
+imp_? = Char('Imp Outcast',   135, 10, 0, 0, ?, ?,         def_drop,         prb_drop,  0, 0, 0, ['Daemon', 'Imp'],     imp_med_wep, imp_goo_arm, AI=AI_onetarg)
+
+#---------------------demons-------------------
+demon_1 = Char('Demon Slave',    100, 7,  2, 0, 50,  75,  dem_def_drop_low, dem_prb_drop_low, 0, 0, 0, ['Daemon', 'Demon'],      dem_bas_wep, dem_bas_arm, AI=AI_servant)
+demon_2 = Char('Lower Demon',    100, 7,  2, 0, 60,  86,  dem_def_drop_low, dem_prb_drop_low, 0, 0, 0, ['Daemon', 'Demon'],      dem_lig_wep, dem_lig_arm, AI=AI_weakfirst)
+demon_3 = Char('Demon',          150, 11, 1, 0, 70,  105, dem_def_drop_med, dem_prb_drop_med, 0, 0, 1, ['Daemon', 'Demon'],      dem_lig_wep, dem_lig_arm)
+demon_4 = Char('Demon Fighter',  150, 11, 1, 0, 80,  127, dem_def_drop_med, dem_prb_drop_med, 0, 0, 1, ['Daemon', 'Demon'],      dem_med_wep, dem_med_arm, AI=AI_onetarg)
+demon_5 = Char('Higher Demon',   270, 16, 2, 0, 85,  180, dem_def_drop_hig, dem_prb_drop_hig, 0, 0, 1, ['High Daemon', 'Demon'], dem_lig_wep, dem_med_arm, AI=AI_strongfirst)
+demon_6 = Char('Demon Guardian', 270, 16, 2, 0, 90,  203, dem_def_drop_hig, dem_prb_drop_hig, 0, 0, 1, ['High Daemon', 'Demon'], dem_med_wep, dem_goo_arm, AI=AI_servant)
+demon_7 = Char('Demon Warlord',  270, 16, 2, 0, 100, 300, dem_def_drop_hig, dem_prb_drop_hig, 0, 0, 1, ['High Daemon', 'Demon'], dem_goo_wep, dem_vgo_arm, AI=AI_command)
+demon_8 = Char('Demon Cultist',  160, 12, 1, 0, 50,  100, dem_def_drop_low, dem_prb_drop_low, 0, 0, 1, ['Daemon', 'Demon'],      dem_med_wep, dem_lig_arm, AI=AI_onetarg)
+demon_9 = Char('Demon Bishop',   350, 17, 3, 0, 300, 400, dem_def_drop_hig, dem_prb_drop_vhi, 0, 0, 2, ['High Daemon', 'Demon'], dem_goo_wep, dem_vgo_arm, AI=AI_onetarg)
+
+
+#------------------Botir-------------------------
+botir_1 = Char('Weak Botir',    50,  5,  2, 0, ?, ?, ?,        ?,        40, 7,  0, ['Botir', 'Imp', 'Low Daemon'], ???,     ???,     AI=AI_mag_dmg_scarce,  [], [], [basic_dmg_spell], [1])
+botir_2 = Char('Rogue Botir',   60,  5,  1, 0, ?, ?, def_drop, prb_drop, 50, 10, 0, ['Botir', 'Imp', 'Low Daemon'], botir_wep, botir_arm, AI=AI_mag_dmg_burst,   [], [], [basic_dmg/heal/buff_spell], [1])
+botir_3 = Char('Botir Healer',  130, 6,  1, 0, ?, ?, def_drop, prb_drop, 90, 9,  0, ['Botir', 'Demon', 'Daemon'], botir_wep, botir_arm, AI=AI_mag_heal_simple, [], [], [basic_st_heal_spell, st_heal_spell, basic_aoe_heal_spell], [1, 1])
+botir_4 = Char('Botir',         140, 9,  1, 0, ?, ?, def_drop, prb_drop, 70, 12, 0, ['Botir', 'Demon', 'Daemon'], botir_wep, botir_arm, AI=AI_mag_dmg_simple,  [], [], [basic_aoe_dmg_spell, basic_st_dmg_spell, st_dmg_spell], [1, 1, 1])
+botir_5 = Char('Botir Focuser', 120, 10, 2, 0, ?, ?, def_drop, prb_drop, 50, 8,  0, ['Botir', 'Demon', 'Daemon'], botir_wep, botir_arm, AI=AI_mag_foc_effwait, [], [], [basic_dmg_buff_spell, basic_regen_buff_spell, basic_armor_buff_spell], [1, 1, 1])
+
+botir_6 = Char('???',           90,  8, 2, 0, ?, ?, def_drop, prb_drop, 50, 8,  0, ['???'], botir_wep, botir_arm, AI= , [], [], [], [])
+
+botir imp damage = Char('Damaging Impotir', 50, 7, 1, 0, ?, ?, , , 100, 10, 0, ['Botir', 'Low Daemon', 'Imp'], , , AI=AI_rand_Mag_dmg_simpl)
+botir imp healing = Char('Healing Impotir', 60, 5, 1, 0, ?, ?, , , 100, 10, 0, ['Botir', 'Low Daemon', 'Imp'], , , AI=AI_rand_Mag_heal_simpl)
+botir imp buff = Char('Manipulating Impotir', 50, 6, 0, 0, ?, ?, , , 100, 10, 0, ['Botir', 'Low Daemon', 'Imp'], , , AI=AI_servant_Mag_buff_fast)
+
+botir demon damage MT = Char('Damaging Demonotir', 150, 11, 1, 0, ?, ?, , , 200, 30, 1, ['Botir', 'Daemon', 'Demon'], , , AI=AI_onetarg_Mag_dmg_fast)
+botir demon heal ST = Char('Healing Demonotir', 150, 11, 1, 0, ?, ?, , , 200, 30, 1, ['Botir', 'Daemon', 'Demon'], , , AI=AI_onetarg_Mag_heal_simple)
+botir demon fighter = Char('Demonotir Fighter', 180, 13, 1, 0, ?, ?, , , 130, 9, 1, ['Botir', 'Daemon', 'Demon'], , , AI=AI_weakfirst_Mag_buff_effwait_self)
+
+
+Char(name hp_max atk atk_var recruitment_cost=0 g_drop=0 exp_drop=0,  def_drop=[], prb_drop=[],
+    mana_max=0 mana_gain=0 defence=0 defence_type='none' weapon=basic armor='basic', AI=AI_random,
+    skill=[], skill_tree=[], magic=[], magic_tree=[], passive=[], passive_tree=[]
+    tree_step=[])
+
+botir damage -/ST/MT/AT 
+botir heal -/ST/MT/AT 
+botir manipulating (de/- buff) -/ST/MT/AT
+botir fighter - buff self/damage
+botir warmage - ST+MT+AT
+
+weak botir(Impotir) - imp
+botir(Demonotir) - demon
+strong botir(_otir) - unknown daemon
+powerful botir(_otir) - unknown daemon 2
+
+ST - single target
+MT - multiple targets
+AT - all targets    (same as V)/for\
+AoE - area of effect(same as A)\now/
+
+AI_mag_[1]_[2]
+[1]
+dmg - focused on using damaging magic
+heal - focused on using healing magic
+buff - focused on using buff magic on others
+foc - uses magic on self
+support - heal and buff magic
+mix - uses all of the magic it has
+
+[2]
+scarce - uses magic once it has full mana
+burst/fast - ? type of AI, that uses magic whenever it can on a target chosen by ? AI
+simple - uses magic when has over half mana, else just attacks. If health(self, ally or enemy) drops to low levels, uses special magic
+effwait - effect wait - uses magic once effect of some effect has expired
+
+

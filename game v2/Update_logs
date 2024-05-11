@@ -1,0 +1,567 @@
+﻿to do:
+-make consequences for abandoning comission
+-allow special attack rewards to be received
+-make consequences for losing a battle?
+-change way how gained rewards from cmsn are shown to more like in future Cmsn_info
+-an idea going far, far into the optimistic future of this game; separate game into many roads(like 
+  pacifist for example(i'm writing lots sentences, which should tell player, that he is bad character
+  in this game))
+-make assasination target enemies that are stronger(in level)
+-make enemies: Deserter Hunter
+-made upgraded enemies and their rewards used in comissions and delivery. Now make same for
+  assasination its rewards
+-magic/skill with effects, like damage and debuff others/buff self, heal and buff target or debuff self
+-change AI scripts to be similar to special attacks
+-trend to keep: more advanced magic does not increase cost(or increases it but by a little)
+\-or use this trend: make sp_atk_lvl_up add new magic in stead of replacing it with better ones
+-mana costs of magic: AT>ST>MT
+-AI_mage for damage, magic
+-EOT_summ for passives, there is no comment for check and end
+-change effects, so they can be MT or AT
+-modify/divide AI_mage_buff so that AI does not constantly use magic
+-rewrite Item.use_item, delete t_comm there
+-weakening potion should work on enemies(now it targets allies)
+-remove try except from Item.use_item
+-add to passive_comm comment when effect ends
+\- passive_comm of ending when it was started by an item/magic
+\- passive_comm of ending when it was caused by character
+make SP_magic that use effect be able to work on multiple targets(needed changes in effect_init, Effect class)
+rewrite revival and heal functions used in Item class instances(output format has changed, so some information is lost or may throw an exception)
+what if item was selected, but couldn't be used or user doesn't want to use it
+
+
+
+PUT ON HOLD:
+	-loading comission tables for requirements and rewards from file
+	-implement basic magic AI
+	-implement monster mages
+	-make more Effects for buffs/debuffs
+
+
+Game 0.4.019
+  11.02.2022
+  features:
+	-add: turn comment for effect about its remaining time and its end
+	-change: turn comments for effects(like attack up, defense down) are handled by Effect function
+	-change: changes in Item.use_item, SP_attack.use, effect_init and Effect
+    -fix: display of items in menu threw out an error. Cause was recent change(v0.4.018) of value names in Item class.
+
+
+Game 0.4.018:
+  ??.??.2020
+  features:
+	-add: AI_mage_buff - AI that uses buff and debuff magic on self, allies and enemies [Didn't expect
+	  debuff part, didn't you?]
+	-change: unified and shortened initiators for Effects
+	-change: expanded input for special attack, effect, item
+
+Game 0.4.017:
+  24.07.2020
+  features:
+	-add: if player had not slain any monster, appropriate info in Bestiary will be displayed
+	-add: potion that increase and decrease defence
+	-add: magic that increases/decreases attack/defence
+	-change: replaced some parts of loop parts of Effects with Char.stat_set()
+	-change: swapped inputs for sp_atk inner functions(target, q1, q2 -> q1, q2, target), so that
+	  effect function can be used
+	-fix: multi-target special attacks could throw an error (reduced len(team_x) by 1 in randint)
+	-fix: wrong sp_atk assignment after level_up(special attacks would be given from one tier/level
+	  higher)
+
+
+Game 0.4.016d:
+  07.07.2020
+  features:
+	-add: special attack headers for multi target attacks and these multi target special attacks
+	-change: added another rule to AI_mage_heal. Now if one character is badly damage, AI will not try
+	  to use AT magic.
+	-change: AI_mage_heal can now use multi target healing magic. It will use it quite rarely, as its
+	  rule is in the area that is denied by second AT rule
+
+Game 0.4.016c:
+  03.07.2020
+  features:
+	-add: AI_mage_heal. It works as the code is written(kappa) but there is no enemy yet that uses it.
+	-change: changes in enemy side of fight to accomodate of AI that uses magic
+	-change: AI scripts now output index as first output(noticed, that after AI outputted class
+	  instance, it was converted back to index in team list)
+	-fix: added stat_set after mana regeneration and passives activation in fight. Before it might have
+	  caused wrong information to be displayed.
+
+Game 0.4.016b
+  01.04.2020
+  features:
+	-add: single target damage and heal magic, mana regenerating skill
+	-add: second value for special attacks
+	-add: dev fight
+	-fix: bug, that could have caused some equipment missing, or appearing after equiping armor/weapon
+	  when character already had one. (error laid in num2char. After swapping for x in lis with 
+	  for y in all_id_class everything started to work fine) 
+
+Game 0.4.016a:
+  27.06.2020
+  features:
+	-change: altered special attack headers, so that AI can use them(added AI_target as input to all
+	  of them, if it is None, it works as it used to). There should be no change on user side.
+	-change: sph_t1 and sph_t2(targeting whole teams) changed to sph_ally_AT and sph_enem_AT
+	  respectivly and neutralised them(they check what team character using sp_atk is from and output
+	  appropriate values).
+	-change: sph_t1_targ and sph_t2_targ to sph_ally_ST and sph_enem_ST
+	-change: variable names for passives and magic(changed _all_ to _AT_)
+	-change: variable values used in fight for x.team from allies and enemies to team 1 and team 2 
+
+Game 0.4.016:
+  ?.06.2020:
+  features:
+	-add: bestiary, where information about enemies is shown if you killed enough of them.
+	-change: other/random comissions are only reset at the start of the game and after a battle
+	-fix: wrong comission loading after load has been moved to separate function has been fixed
+
+Game 0.4.015a:
+  11.06.2020:
+  features:
+	-add: before main loop is started, question pops up asking about loading autosave. If it fails
+	  loading one, it quits program to not overwrite the autosavefile.
+	-change: upgraded menu_print. Now it can print output in multiple columns
+	-change: small change in kill counter display
+
+Game 0.4.015:
+  07.06.2020
+  features:
+	-add: loading autosave
+	-add: possibility to force name of generated comission to use only encounter name if @ is written
+	  at the beginning of name or if its rank is at least 2 higher than team rank(ie. instead of
+	  'Hunt the Imps', 'Imps' will be shown if '@Imp' is written)
+	-add: saving and loading flags/gamestate switches
+	-add: statistic increase with level up can now be assigned to each of the characters individually
+	-change: little change in char.lvl_up_check
+	-info: development of comission tables had been put on hold
+
+Game 0.4.014a:
+  28.05.2020:
+  features:
+	-add: autosave and option to disable it. Right now aotusave is performed once player enters main
+      menu
+	-change: option keys from string to integer
+
+Game 0.4.014
+  29.04.2020
+  features:
+	-add: rank advancement comissions
+	-add: help regarding comission
+	-add: variable "flags" with function flag_check(). Right now used only for rank advancement.
+	-add: information display 4>1>8 for displaying other variables
+	-change: moved save and load to separate function
+	-fix: one another fix for loading from save
+
+Game 0.4.013b
+  04.04.2020
+  features:
+	-add: saving of any type of accepted comission(basically, saves: id, rank, type, name,
+	  progression(kills, items) and rewards) and team rank(used to determine rank of comission)
+	-add: *rules argument in comission __init__ for future flag setting
+	-add: random comissions can now be accepted
+	-change: types of functions to 'assa', 'deli'(shortened to 4 letter format for saving)
+	-change: separates assasination type comission from hunt in comission generator
+	-change: rewards from comission are displayed in a better way(separated them into types)
+	-fix: gathering comission check was not detecting materials in inventory
+	-fix: hunt comission check was not displaying update information
+	-fix: bug that added items to held weapons, armor, mater after completing comission
+
+Game 0.4.013:
+  24.03.2020
+  features:
+	-add: comisison generator function(list of names/requirements/rewards)
+	-add: function for sorting kill counter type lists
+	-add: 2 new demon types and 3 new encounters
+	-add: new materials(still useless), new weapons and armor available only from comissions
+	-change: change of held_* lists to counter type lists
+	-change: of held_items to list like kill counter in progress
+	-change: deleted list_substr function
+	-change: minor text changes in 4>5
+	-change: reduced gold dropped by enemies, and changed values/costs of materials
+	-change: comission type 'gathering' changed to 'delivery'
+	-change: in comission changed reward value from list to counter list
+	-fix: exploit, that could cause creation of unlimited amount of armor
+	-fix: errors in list_2d_add
+
+
+Game 0.4.012:
+  13.03.2020
+  features:
+	-add: new function list_sub_2d_id()
+	-add: saving of comission kill counter, accepted comission(should work)
+	-add: assasination comission check[Just merged it with hunt, but shh. New feature.]
+	-add: raid comission check [Makes use of hunt and gathering check. Also shhh, new feature.]
+	-change: rewrote gathering comission check
+	-change: polished(made useful) comment about ending comission and removing accepted comission
+	-change: converted num2char function into lambda
+	-change: little changes in menu_print, type_check, team_target, Char.__init__, comission check
+	-fix: wrong comment in hunt comission completion check(changed some accept_cmsn.prog_kill to 
+	  kill_counter)
+	-fix: when hunt comission was partialy completed, Completion requirements could say something like:
+	  "deliver 1xImp" instead of "hunt 1xImp"
+	-fix: little bug, if enemies were killed by passive ability, next turn first character could act,
+	  even though, every enemy was dead
+	-fix: loading of kill counter
+	-fix: bug, which caused attack(and defence i think) increase while constantly loading savefile
+	-fix: error, which i caused while moving to enumerate()
+	-fix: bug causing comission kill counter to be always the same as normal kill counter(once you
+	  updated comission, you could not update it any further, as progress would not be recorded)
+	-fix: gathering domission didn't delete delivery items after progress report
+
+
+Game 0.4.011c:
+  05.03.2020
+  features:
+	-add: completed(?) hunt comission completion check
+	-add: new function list_substr()
+	-change: little changes to text (while equiping armor, accepting new comission)
+	-change: prevented fight_end function to write that ' ' items have been collected if none were
+	  (for def_drop)
+	-change: ("if z < 0:" to "if z <= 0:" in list_substr)
+	-fix: exception after defeating enemies of Demon class (custom/empty drop tables were defined in
+	  wrong way)
+
+Game 0.4.011b:
+  25.02.2020
+  features:
+	-working on quest completion(hunt)
+	-add: you can now accept a comission
+	-add: you can see current comission in 3>2>2
+	-add: completing gathering comission works (i guess)
+	-add: completing comission yields rewards
+	-add: kill counter
+	-add: you can now save and load kill counter
+	-add: new option in Cmsn_info, that allows to show progress_* instead of completion_*
+	-change: moved whole Cmsn class and its instances, functions below instances of characters
+	-change: all comissions now have instances of classes instead of text and requirements/rewards
+	-change: shortened comission display function and adapted them to previous change
+	-fix: refferenced to variable in wrong way, which caused exception from nice_drop_comm (changed
+	  "index = orig.index(x)" to "index = [y.id for y in orig].index(x.ID)"
+	-fix: exception that caused revival items to break the Game when used in fight has been fixed
+	  (overwritten variable, which was user for storing list(z) in revival function)
+	-fix: didn't add certain characters to global_allies_baseline, which caused savefile to not load
+	  (test_bois weren't added)
+
+Game 0.4.011a:
+  22.02.2020:
+  features?:
+	-version with debug comments in gathering comission check
+
+Game 0.4.011:
+  12.02.2020
+  features:
+	-fix: prevented test characters from being able to recruit
+	-fix: bug that causes exception(after recent conversion from string to fstring) in shop(i think)
+	-add: little print about leaving shop
+	-add: comission display in 3>2>1, allows to display basic information of comission(default) and
+	  detailed(after choosing option(search and protection will not work either way, so they are
+	  not active))
+	-change: line breaker in menu_print from "sep = z if z != 0 else 1" to "sep = z + 1"
+	  and "part1 = x[:sep]" to "part1 = x[:sep-1] if z == width else x[:sep]"
+
+Game 0.4.010:
+  03.02.2020
+  features:
+	-created Cmsn(comission) class [Yaay][much WOW, such progress, very engaging][shh-] not available
+	  for player yet
+	-shortened material gain comment(by adding nice_mater_comm())
+	-added information display for materials (4>1>6)
+	-added some flexible name length in some information displayers 4>1
+
+Game 0.4.009:
+  19.01.2020:
+  features:
+    -small change to the way, how held items added (no visual change)in Item.buy_item
+	-added condition in menu_print>line breaker that sets separator to 1 if available
+	  space is at 0 indet
+	-added class for materials (Mater)
+	-fixed little error in 4>1>1 that caused 'weapon:(weapon name)' to appear twice
+	-slowly introducing drop tables
+	-drop tables can be assigned to characters
+	-drop table is now: definitive drop table and probable drop table
+	-added mainframe for manual drop tables through fight
+	-added gain of materials and appropriate comment in fight_end()
+
+Game 0.4.008
+  08.01.2020
+  features:
+    -changed stat_print code - now it has no option to print results (only returns)
+    -now skills may be gained by default each 5 levels (no change) or they can be 
+	  acquired at certain levels (new stuff). It all depends on character (though, 
+	  right now every character uses default way
+	-fixed exception, when character leveled up too much and they acquired/upgraded
+	  their last sp_atk (added +1 to protective condition)
+	-in menu_print moved footer creator to above new menu creator and changed condition
+      from 'len(menus) != 1' to 'len(menus['menu1']) > length' because it caused
+	  exceptions in some cases (like causing to make 1 menu less, if height of terminal
+	  was 24, and there were 200 lines of text, after which an exception occured)
+
+! ! ! ! ! 
+fatal flaw in menu_print (well not really, but messes up core function)
+when in dev->1 first 20, then 100
+exception bcs not enough menus are created
+caused by additional footer creator
+taking it earlier does not fix this error
+if it is where it is, one less menu may be created [or more, idk]
+! ! ! ! ! 
+fixed
+moved it 1 subfunction earlier and changed condition
+
+Game 0.4.007
+  05.01.2020
+  features:
+    -fixed a part of code, which caused some text to not show up(in team_target()
+	  sec_menu)
+    -very minor performance increase (commented 3 stat_print())
+
+Game 0.4.006:
+  04.01.2020
+  features:
+    -now can be launched in terminal directly from GUI(in linux only and also requires
+	  python3.7 and its alias[i think])
+    -some minor text changes(comments, CRUCIAL VARIABLE CHANGE, change string to
+	  fstring) [you know, common stuff]
+    -fixed small hole, that caused input error checker to not detect 0 as wrong input
+    -fixed error caused by using revival when everyone (that could be revived) was alive
+
+Game 0.4.005:
+  21.12.2019
+  features:
+	-added skill Armor piercing attack
+	-concealed development options
+	-added a line in experience help
+
+Game 0.4.004:
+  15.12.2019
+  features:
+    -each 5 levels new special attacks can be gained, and player will be informed about 
+      it at the end of battle
+    -sp_atk_lvl_up now returns(should) proper turn comments
+    -small change to saving ID of items
+    -adding sp_atk gain info
+
+Game 0.4.003:
+  09.12.2019
+  features:
+    -sp_atk trees work(should at least) properly. each 5 levels new skills may be acquired
+      if character has no tree, this check will be ommited
+    -added sp_atk upgrade in char.lvl_up_check() for custom an default sp_atk 
+	 progress/tree
+    -starting special attacks now correspond to tree
+    -fixed minor bug in 4>1>5, which caused menu overflow
+
+Game 0.4.002:
+  06.12.2019
+  features:
+    -added in Char.__init__() handling for list input for special 
+      attacks([[apsp_1,sp_2,sp_3][m_1,m_2]]). If no list will be inputed, script 
+      will(should) handle that
+    -changed the way, how 20th enemy team is assigned
+    -changed initial cooldown initiator in fight(caused exception through this build)
+    -given mage and hero some special attacks(they had some, but they got them again)
+
+Game 0.4.001:
+  05.12.2019
+  features:
+    -added multiple versions of spells
+    -if you do not hold any items, when choosing items appropriate text will be shown
+    -doubled exp gained from killing monsters and reduced statistics gain
+    -added help about skills, magic and passives
+    -disabled atk an mana_gain level up increase
+    -fixed experience loading(should work now)
+
+Game 0.4.000f:
+    -change stat_len(), it can now return string with custom fillers
+    -fixed save(didn't work since ID change)
+
+Game 0.4.000e:
+    -added weapons: mace, flail, bardiche and renamed armors
+    -changed how special attack functions work(used to be one function for one special
+      attack now there are header and inner that i can combine together to create
+      custom one)(more space save)
+
+Game 0.4.000d:
+    -changed way how ID are assigned to each class
+    -added new characters: Fighter and Defender
+    -modified demons, so that they give experience and gold and have proper attack scripts
+    -choosing magic in fight now shows mana cost of spell
+    -if on hit effect 'damage heal' did not heal, no additional heal message will be shown
+    -removed unnecessary pause line when user did not confirm buying an equipment
+
+Game 0.4.000c:
+    -added weapon effect 'damage heal' and weapon 'healing sword'(on hit effect)
+    -added all damaging magic and better all heal magic
+    -modified equipment so that it shows on hit effect
+    -fixed '4.check > 1.display > 5.special' to show proper mana cost
+
+Game 0.4.000b
+    -fixed missing variable(active_effects_cp) in fight that caused exception, when player
+      entered the fight and immidietally fled
+
+Game 0.4.000a:
+    -now healing from special attacks(and passive) doesn't raise dead
+
+Game 0.4.000:
+  15.11.2019
+  features:
+    -beggining of effect is now shown in end of turn summary
+    -very minor change to showing expanded statistics
+    -if no passives are present, no header will be shown in end of turn summary
+    -passives are now assigned to characters(if it dies, passive will(should)
+      stop activating)
+    -added in '4.Check > 1.Display' menu option, that shows passives, skills and magic
+
+Game 0.3.005a:
+    -refined sp_passive(passives) and they are now working
+    -added passive_comm to EoT_summ(commentary of passives to end of turn summary)
+    -aded passive heal
+
+Game 0.3.005:
+  12.11.2019
+  features:
+    -fixed minor exception when choosing target(while choosing next page of menu)
+
+Game 0.3.004e:
+    -leveling up increases mana_max and mana_gain
+    -information display shows mana_gain
+    -if exp gained in a fight is more than required for current and more levels, multiple
+      levels will be gained
+
+Game 0.3.004d:
+    -added mana regeneration at the end of turn(with variable mana_gain for each Char)
+    -added more enemies(demons, they are much stronger than imps)
+    -changed way, how names are showed in displays, now they are one letters longer than
+      maximum length of the longest name displayed
+
+Game 0.3.004c:
+    -skills and magic is now attached to character
+    -fixed wrong variable in team_target, that caused exception when choosing target for
+      attack or other fight action
+    -added sp_str_atk and spf_str_atk
+
+Game 0.3.004b:
+    -added cooldown on skills, which are(should be) working properly
+    -if character has no mana, he can't choose magic in special attack
+      A A A will work similarly when skills and magic are assigned to each character
+
+Game 0.3.004a:
+    -added sp_double_atk, spf_doubl_atk and interface for skills
+    -fixed AI_random() (did not write AI_target)
+    -now after save/load excessive variables are deleted
+
+Game 0.3.004:
+  30.10.2019
+  features:
+    -added values for mana, mana_max, stat_mana, stat_mana_max
+    -fixed wrong line breaking in menu_print(), not showing menu in 5.menu
+    -added quit() to the end of script
+    -added new character Mage with that has maximum mana amount
+    -reworked stat()
+    -now using magic requires mana and lowers it with each usage mana is lowered
+    -mana is recovered at the start of each fight
+
+Game 0.3.003c:
+    -added sp_heal_all(spf_heal_all) magic and interface for using magic
+    -added 'Initialising Game' notes before def type_check():
+
+Game 0.3.003b:
+    -fixed in_err_ch outer layer in fight>use_item
+    -added words'Allies' and '', 'Enemies' to return list in stat_print
+
+Game 0.3.003a:
+    -base class structures for special attacks
+
+Game 0.3.003:
+  19.10.2019
+  features:
+    -information display in "4. Check items/characters" now takes use of new menu
+      (utilises [next] and [back] buttons)
+
+Game 0.3.002:
+  16.10.2019
+  features:
+    -if menu will be longer then length of the screen excess lines will be
+      passed to next menu and new footer will be aded
+    -changed help to use sec_menu option of menu_print()
+
+Game 0.3.001:
+  12.10.2019
+  features:
+    -if line from list given to menu_print() is too long, it will be cut into 2 pieces
+      and replace the old line
+
+Game 0.3.000:
+  11.10.2019
+  fearutes:
+    -new interface(still TUI though), now features allign to left, right, top, bottom
+	 and clears screen (such improvment, much wow) alligning is dynamicly modified
+	 basing on terminal size
+    -added option to stat_print() which allows to return list instead of printing
+    -replaced ALL print() with new menu_print() (even in try: except:)
+
+Game 0.2.001 // 0.1.006:
+  06.10.2019
+  features:
+    -loading while no save file is present will not throw out an error
+
+Game 0.2.000 // 0.1.005:
+  03.10.2019
+  features:
+    -changed information display in "4. Check items/characters"(use to display
+	 everything, now everything is separated for user)
+    -added help for experience system and battle system
+    -sortID key now is lambda (used to be a function)
+    -better monster scripts(AI) now works and it is possible to disable it in settings
+
+Game 0.1.004:
+  24.09.2019
+  features:
+    -using item now correctly shows message in end of turn summary
+    -gaining experience now depends on level and number of team members
+      (the higher level, the lower gain)(level gain formula per character: 
+      l - int(l*(x.level-1)/100) where l is base of the experience gained per character)
+    -required exp for level is dependent on said level (use this function: y=200*(x-1)
+      where x is level and y is exp needed for this level (from previous))
+    -level now gives increased stats (10% each level, reduced by 10 if hp boost bigger
+      than 20, reduces by 2 if atk boost higher than 3)
+    -most code now uses Char.stat_set() which sets variables used in stat tables
+    -save/load now saves and loads level progress (total exp is saved as two 
+      4-number lines
+    -save/load now properly works with creator_hand and creator_skin
+
+Game 0.1.003:
+  17.09.2019
+  features:
+    -refined (shortened) stat_len function
+    -added variable in each char for exp_drop, exp and level (soon leveling system comes 
+      out)
+    -removed (...,l=0) from team_target (found no need for it)
+    -if item is used, but it's effect didn't work (determined by item function itself) 
+      it is not deleted from held_items, and proper turn comment is shown during and 
+      at the end of a turn (also determined by item function)
+    -tested leveling system formulas (see level_progress.txt in level/'level progress'/)
+
+Game 0.1.002:
+  13.09.2019
+  features:
+    -heal function can no longer revive
+    -added revival function and associated items(v1, v2, full)
+    -fixed old random.randint() to randint() in enemy attack loop
+    -changed comment in team_target() from 'attacking a dead body' to 'acting upon
+      a dead body' [hey, psst, hey, you want free necrophilia trait?]
+    -tested exp gaining formulas (see level_fncv1.txt and level_fncv2.txt tests/level/)
+
+Game 0.1.001:
+  12.09.2019
+  features:
+    -introduced update logs
+    -made proper save and load options and a second one which is a tiny bit
+      different (see save_load_v1.py and save_load_v2.py in tests/save_load/, Game.py 
+      uses v2)
+    -changed comparisions x.weapon == basic and similar ones (x/char, weapon/armor,
+      ==/!=, basic/basal) to x.weapon.ID == basic.ID. Previous caused problems with deepcopied
+	  Weapon and Armor when save was loaded
+    -shop has acces to global variable sell_red. Before item.selling_items returned
+      that sell_red is not defined
