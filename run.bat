@@ -1,2 +1,0 @@
-python Game.py
-pause
